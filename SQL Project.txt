@@ -1,0 +1,332 @@
+1. Create a Table named as Students.
+create table Students (ID number(3), Name varchar(10), Address varchar(10), Salary number(7), Age number(2), DOJ Date);
+
+2. Rename the table name from Students to Squad.
+rename Students to Squad;
+
+3. Insert 1 record in table Squad.
+insert into squad values(101, 'Mahendra', 'Ranchi', 35000, 38, '15-Jun-18');
+
+4. Insert Multiple Records into the Table Squad.
+insert into Squad values (&ID, &Name, & Address, &Salary, &Age, &DOJ);
+Enter value for id: 102
+Enter value for name: 'Virat'
+Enter value for address: 'Bangalore'
+Enter value for salary: 32000
+Enter value for age: 34
+Enter value for doj: '04-Mar-18'
+1 row created.
+ /
+Enter value for id: 103
+Enter value for name: 'Rohit'
+Enter value for address: 'Jharkhand'
+Enter value for salary: 21000
+Enter value for age: 42
+Enter value for doj: '11-Oct-19'
+1 row created.
+
+5. Display all Column Data of Table Squad
+select * from Squad;
+
+6. Display the Table Structure of table Squad.
+Desc Squad;
+
+7. Remove the Table Employee from the Database.
+Drop table Employee;
+
+8. Delete all records from the Table Batch101.
+Truncate table Batch101;
+
+9. Save the Table Data into the Database.
+Commit;
+
+10. Rename the Column Name Address to Location from the table Batch102.
+Alter table Batch102 rename column Address to Location;
+
+11. Remove Column Address from table Batch101.
+Alter table Batch101 drop column Address;
+
+12. Reset DOJ Column Date Format from DD-MON-YY to DD-MM-YYYY.
+Alter session set NLS_DATE_FORMAT = 'DD-MM-YYYY';
+
+13. Change the Datatype of Location Column of Table Employee from varchar(10) to number(10) when the All Column Fields are Empty.
+Alter table Employee modify Location number(10);
+
+14. Change the Size of the Age Column of Table Employee from number(2) to number(4).
+Alter table Employee modify Age number(4);
+
+15. WAQ to get the list of managers from table Employee whose salary is greater than 50000.
+Select * from Employee where Job = 'Manager' AND Salary > 50000;
+
+16. WAQ to get the list of Employees in wnich Job is manager or salary is less than 50000 from Employee table.
+Select * from Employee where Job = 'Manager' OR Salary < 50000;
+
+17. WAQ to get List of all Employees whose DeptNo are 10 & 50 from Table Employee.
+Select * from Employee where DeptNo = 10 OR DeptNo = 50;
+
+18. WAQ to get List of all Employees whose salaries are between 50000 to 80000 from Employee Table.
+Select * from Employee where Salary Between 50000 And 80000;
+OR
+Select * from Employee where Salary >= 50000 AND Salary <= 80000;
+
+19. WAQ to get List of all Employees from Employee Table who are in 10, 20, 30, 40, 50 DeptNos.
+Select *  from Employee where DeptNo IN (10, 20, 30, 40, 50);
+
+20. WAQ to get List of all Employees from Employee Table whose Jobs are Manager, Accountant, HR.
+Select * from Employee where Job IN ('Manager', 'Accountant', 'HR');
+
+21. WAQ to get List of all Employees from Employee Table whose Name's third letter is r.
+Select * from Employee where Name LIKE '_ _r%';
+
+22. WAQ to get List of all Employees from Employee Table who are not Entered their Location.
+Select * from Employee where Location IS NULL;
+
+23. WAQ to get List of all Employees from Employee Table who are Entered their Location.
+Select * from Employee where Location IS NOT NULL;
+
+24. WAQ to get List of all Employees from Employee Table who are Joined in 2018.
+Select * from Employee where DOJ like '%-%-2018';
+OR
+Select * from Employee where DOJ BETWEEN '01-01-2018' AND '31-12-2018';
+OR 
+Select * from Employee where DOJ >= '01-01-2018' AND DOJ <= '31-12-2018';
+
+25. WAQ to get List of all Employees from Employee Table in ascensing order w.r.t. their Salaries.
+Select * from Employee Order By Salary Asc;
+
+26. WAQ to get List of all Employees from Employee Table in descensing order w.r.t. their Salaries.
+Select * from Employee Order By Salary Desc;
+
+27. WAQ to get Total Salary of the Employees in Descending Order w.r.t. Jobs which from Employee Table having Total Salary less than 10000.
+Select Sum(Salary), Job Group By Job Having Sum(Salary) > 10000 Order By Sum(Salary) Desc;
+
+28. Create a Table named as Batch110 by Using All Constraints.
+Create table Batch110 (ID number(3) Primary Key, Name varchar(10) Not Null, Address varchar(10) Default 'Mumbai', PhNo number(12) Unique, Salary number(7), Age number(2) check(Age >= 18), DOJ Date);
+
+29. WAQ to Insert Data into ID & Name Columns of Table Batch110.
+Insert into Batch110(ID, Name) values (102,'Rahul');
+
+30. WAQ to Give the Count of total records of Table Employee.
+Select Count(*) from Employee;
+
+31. WAQ to Give the Count of total records of Table Employee who entered their Locations.
+Select Count(Location) from Employee;
+
+32. WAQ to display the Heighest Salary of the Employee from Table Employee.
+Select Max(Salary) from Employee;
+
+33. WAQ to display the Lowest Salary of the Employee from Table Employee.
+Select Min(Salary) from Employee;
+
+34. WAQ to display the Average Salary of the Employee from Table Employee.
+Select Avg(Salary) from Employee;
+
+35. WAQ to display the Sum of the Salary of the Employees from Table Employee.
+Select Sum(Salary) from Employee;
+
+36. WAQ to Display the Total Marks of Each Student from the Table Marks.
+Select Name, (Maths + Science + English) as Total_Marks from Marks;
+OR
+Select Name, Maths + Science + English from Marks;
+
+37. WAQ to display the Employee Details from Table Employee who has heighest Salary.
+Select * from Employee where Salary = (Select Max(Salary) from Employee);
+
+38. WAQ to display the Employee Details from Table Employee who has lowest Salary.
+Select * from Employee where Salary = (Select Min(Salary) from Employee);
+
+39. WAQ to Save the Data & close Oracle Sql Plus.
+Exit;
+
+40. WAQ to Temporary Save the Manipulated Data in Table Squad with Savepoint.
+Savepoint p1;
+
+41. WAQ to Get Data till the Savepoint p1 before permanent saving.
+Rollback to p1;
+
+42. WAQ to Get Data till before the permanent saving.
+Rollback;
+
+43. After accidently deleted of the table Employee, how can we get it from Recyclebin.
+Drop table Employee;                           // Delete the Table Employee.
+Show recyclebin;                               // Open Recyclebin.
+Flashback table Employee to before drop;       // Restore the table Employee from Recyclebin.
+
+44. How to Delete table Batch101 from Recyclebin (Permanent Delete).
+Show recyclebin;                               // Open Recyclebin.
+Purge table Batch101;                          // Restore the table Employee from Recyclebin.
+
+45. How to Retrive the Accidently Deleted whole Data from the Table Batch110 just before 15 minutes, before commiting after the Delete Process.
+Delete from Batch110;            // Delete whole Data from Table Batch110.
+Select * from Batch110 as of timestamp(sysdate-interval '15' minute);             // View that Data from Recyclebin.
+Insert Into Batch110  Select * from Batch110 as of timestamp(sysdate-interval '15' minute);     // Restore the Data from Recyclebin.
+
+
+46. Create Tables Emp, Works, Company & Manager.
+Create table Emp(Ename varchar(10), Street varchar(10), City varchar(10) );
+Create table Works (Ename varchar(10), Cname varchar(10), Salary number(7));
+Create table Company (Cname varchar(10), City varchar(10));
+Create table Manager (Ename varchar(10), Mname varchar(10));
+
+47. WAQ to Insert Data with Multiple Rows into Table Emp.
+Insert into Emp values (&Ename, &Street, &City);
+
+Enter value for ename: 'Aman'
+Enter value for street: 'Chawl1'
+Enter value for city: 'Mumbai'
+1 row created.
+/
+Enter value for ename: 'Raj'
+Enter value for street: 'Strt1'
+Enter value for city: 'Mumbai'
+1 row created.
+/
+Enter value for ename: 'Moti'
+Enter value for street: 'Area1'
+Enter value for city: 'Rajasthan'
+1 row created.
+/
+Enter value for ename: 'Raju'
+Enter value for street: 'Mohalla1'
+Enter value for city: 'Kashmir'
+1 row created.
+/
+Enter value for ename: 'Rani'
+Enter value for street: 'Area2'
+Enter value for city: 'Kolkatta'
+1 row created.
+/
+Enter value for ename: 'Shyam'
+Enter value for street: 'Chawl2'
+Enter value for city: 'Bhatinda'
+1 row created.
+/
+Enter value for ename: 'Baburav'
+Enter value for street: 'Peth1'
+Enter value for city: 'Kolhapur'
+1 row created.
+/
+Enter value for ename: 'Rocky'
+Enter value for street: 'Galli1'
+Enter value for city: 'Lucknow'
+1 row created.
+
+
+48. Insert Multiple Records in Table Works.
+Insert into Works Values(&Ename, &Cname, &Salary);
+
+Enter value for ename: 'Raj'
+Enter value for cname: 'HDFC'
+Enter value for salary: 40000
+1 row created.
+/
+Enter value for ename: 'Moti'
+Enter value for cname: 'SBI'
+Enter value for salary: 50000
+1 row created.
+/
+Enter value for ename: 'Rahul'
+Enter value for cname: 'TCS'
+Enter value for salary: 55000
+1 row created.
+/
+Enter value for ename: 'Rohit'
+Enter value for cname: 'Google'
+Enter value for salary: 65000
+1 row created.
+/
+Enter value for ename: 'Aman'
+Enter value for cname: 'P&G'
+Enter value for salary: 60000
+1 row created.
+/
+Enter value for ename: 'Shyam'
+Enter value for cname: 'HCL'
+Enter value for salary: 70000
+1 row created.
+/
+Enter value for ename: 'Raju'
+Enter value for cname: 'Wipro'
+Enter value for salary: 67000
+1 row created.
+/
+Enter value for ename: 'Baburav'
+Enter value for cname: 'HUL'
+Enter value for salary: 90000
+1 row created.
+
+
+49. Insert multiple Records in Table Company.
+Insert into Company values(&Cname, &City);
+
+Enter value for cname: 'HDFC'
+Enter value for city: 'Mumbai'
+1 row created.
+/
+Enter value for cname: 'SBI'
+Enter value for city: 'Rajasthan'
+1 row created.
+/
+Enter value for cname: 'P&G'
+Enter value for city: 'Mumbai'
+1 row created.
+/
+Enter value for cname: 'HCL'
+Enter value for city: 'Bhatinda'
+1 row created.
+/
+Enter value for cname: 'Wipro'
+Enter value for city: 'Kashmir'
+1 row created.
+/
+Enter value for cname: 'HUL'
+Enter value for city: 'Kolhapur'
+1 row created.
+/
+Enter value for cname: 'ParleG'
+Enter value for city: 'Pune'
+1 row created.
+/
+Enter value for cname: 'Jio'
+Enter value for city: 'Indore'
+1 row created.
+
+
+50. Insert Multiple Records in Manager Table.
+Insert into Manager values (&Ename, &Mname);
+
+Enter value for ename: 'Raj'
+Enter value for mname: 'Shivaji'
+1 row created.
+/
+Enter value for ename: 'Moti'
+Enter value for mname: 'Sambhaji'
+1 row created.
+/
+Enter value for ename: 'Rohit'
+Enter value for mname: 'Shahaji'
+1 row created.
+/
+Enter value for ename: 'Aman'
+Enter value for mname: 'Baaji'
+1 row created.
+/
+Enter value for ename: 'Shyam'
+Enter value for mname: 'Yesaji'
+1 row created.
+/
+Enter value for ename: 'Raju'
+Enter value for mname: 'Tanaji'
+1 row created.
+/
+Enter value for ename: 'Baburav'
+Enter value for mname: 'Rayappa'
+1 row created.
+/
+Enter value for ename: 'Nitin'
+Enter value for mname: 'Jyotyaji'
+1 row created.
+
+
+51. Find Enames, Street Address & Cities of Residence for all Employees who Work for HUL and Earn more than 50000.
+select Works.Ename, Emp.Street, Emp.City, Works.Salary from Emp Inner Join Works on Emp.Ename = Works.Ename where Cname = 'HUL' AND Salary > 50000;
